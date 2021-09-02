@@ -200,7 +200,7 @@ string StringTools::double2str1(double val)
   if (expn<-5) decimal=decimal-decadd;
   if (expn>5) decimal=decimal+decadd;
 
-  sprintf (temp," %c%c%s ",sign?'-':'+',buffer[0],buffer+1,decimal-1);
+  sprintf (temp," %c%c%s ",sign?'-':'+',buffer[0],buffer+1/*,decimal-1*/);
   tempstr=temp;
   return(tempstr);
 
