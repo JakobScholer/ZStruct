@@ -28,6 +28,7 @@ int main(int argc, char* argv[])
   double emin = -1000.;
   int nsteps = 1;
   xyzfile="test.xyz";
+  int do_pair_isos = 0;
   switch (argc){
   case 1:
 //    printf(" case 1 \n");
@@ -46,6 +47,12 @@ int main(int argc, char* argv[])
     emax = atof(argv[1]);
     emin = atof(argv[2]);
     nsteps = atoi(argv[3]);
+    break;
+  case 5:
+    emax = atof(argv[1]);
+    emin = atof(argv[2]);
+    nsteps = atoi(argv[3]);
+	do_pair_isos = atoi(argv[4]);
     break;
   default:
     inpfile="xyzfile";
@@ -181,7 +188,7 @@ int main(int argc, char* argv[])
 #if 1
   ZStruct zmain;
 //  zmain.init(xyzfile,xyzlist);
-  zmain.go_zstruct(1);
+  zmain.go_zstruct(1, do_pair_isos);
 #endif
 
 #if 0

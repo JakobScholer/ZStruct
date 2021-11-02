@@ -7,7 +7,7 @@
 #define MIN_CHG 1
 #define RINGSHUTTLE 4
 #define USE_H_TRANSFER 0
-#define DO_PAIR_ISOS 1
+#define DO_PAIR_ISOS 0
 #define TM_PAIRS 0
 
 #define DO_NOT_WRITE 0
@@ -277,7 +277,7 @@ class ZStruct
   int diff_structurecq(int nat, string* anames, int* anumbers, double* xyz1, double* xyz2);
   void swap_atoms(double* xyz, int a1, int a2);
 
-  void do_one_step(ICoord* icr);
+  void do_one_step(ICoord* icr, int do_pair_isos);
   void create_new_reactants(int* rxncont, ICoord* icr);
   void calc_Ea_Erxn();
   void form_reaction_network(int* rxncont, ICoord* icr);
@@ -294,7 +294,7 @@ class ZStruct
  public:
 
   double temperature;
-  void go_zstruct(int nsteps);
+  void go_zstruct(int nsteps, int do_pair_isos);
 
 };
 

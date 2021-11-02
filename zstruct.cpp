@@ -1018,17 +1018,22 @@ int ZStruct::create_react_isos(ICoord* icr)
   return nisoftot;
 }
 
-void ZStruct::do_one_step(ICoord* icr)
+void ZStruct::do_one_step(ICoord* icr, int do_pair_isos)
 {
   update_react_mem();
 
   int nisof = 0;
   if (nreact>0)
   {
-    nisof = create_react_isos(icr);
-#if DO_PAIR_ISOS
-    nisof += create_pairs_isos(icr);
-#endif
+    /* nisof = create_react_isos(icr); */
+/* #if DO_PAIR_ISOS */
+    /* nisof += create_pairs_isos(icr); */
+/* #endif */
+	if (do_pair_isos == 0) {
+		nisof = create_react_isos(icr);
+	} else {
+		nisof += create_pairs_isos(icr);
+	}
   }
   else
   {
@@ -1554,7 +1559,7 @@ void ZStruct::get_nbo_reactants(ICoord* icr)
 }
 
 
-void ZStruct::go_zstruct(int nsteps)
+void ZStruct::go_zstruct(int nsteps, int do_pair_isos)
 {
   printf("  **** test function go_zstruct **** \n\n");
   printf(" nsteps: %i \n",nsteps);
@@ -1581,6 +1586,7 @@ void ZStruct::go_zstruct(int nsteps)
 #else
   printf(" DO_PAIR_ISOS is OFF \n");
 #endif
+  printf(" DO_PAIR_ISOS_CUSTOM is %i\n", do_pair_isos);
 #if TM_PAIRS
   printf(" TM_PAIRS is ON \n");
 #else
@@ -1670,7 +1676,7 @@ exit(1);
   {
     printf("\n\n  Starting step #%i \n",n+1);
     if (nbotype<2)
-      do_one_step(icr);
+      do_one_step(icr, do_pair_isos);
 
     dataf = read_gsm_data();
     printf(" after read, niso: %i dataf: %i \n",niso,dataf);
