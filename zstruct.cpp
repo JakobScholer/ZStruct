@@ -3071,9 +3071,9 @@ void ZStruct::gsm_para(int first, int last)
   printf(" gsm_para range: %i-%i \n",first,last-1); fflush(stdout);
   if (first>last-1) return;
 
-  string cmd = "./qmakegf";
-  system(cmd.c_str());
-  cmd = "qsub "+cmdfile_string+".qsh";
+  #string cmd = "./qmakegf";
+  #system(cmd.c_str());
+  #cmd = "qsub "+cmdfile_string+".qsh";
 #if !SKIPDFT && !SKIPGSM
   system(cmd.c_str());
 #else
