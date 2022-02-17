@@ -1,12 +1,14 @@
 ## ZStruct
-code for ZStruct-2
+Zstruct code based on original implementation from https://github.com/ZimmermanGroup/ZStruct modified in https://github.com/jakobandersen/ZStruct and again modified in this project to disable qsub jobs.
 
-## Overview
-
-ZStruct is a package for automated reaction discovery developed in c++.
-
-For more information, check out the wiki page: https://github.com/ZimmermanGroup/ZStruct/wiki
-
-Sample tutorial files can be found under the tutorial folder: https://github.com/ZimmermanGroup/ZStruct/tree/master/tutorial
-
-## Installation
+## Compile
+'''
+make
+'''
+This creates a zstruct.exe that can be run with either one or two input molecules.
+'''
+./zstruct.exe -250 1000 1 0
+'''
+'''
+./zstruct.exe -250 1000 1 1
+'''
