@@ -1167,15 +1167,15 @@ void ZStruct::get_nbo_reactions(ICoord* icr)
   printf("  niso: %2i \n",niso);
 
   int nbotype = USE_NBO;
-
+  printf("okay 0\n");
   int natomsmax = 10;
   for (int i=0;i<niso;i++)
   if (natoms[i]>natomsmax)
     natomsmax = natoms[i];
-
+  printf("okay 1\n");
   Mopac mopt;
   mopt.alloc(natomsmax);
-
+  printf("okay 2\n");
  //reactant complexes
   NBO* ntest0 = new NBO[niso];
   for (int i=0;i<niso;i++)
@@ -1708,7 +1708,7 @@ exit(1);
 
   if (nbotype>0)
   {
-    get_nbo_reactions(icr);
+    //get_nbo_reactions(icr);
 
     printf("\n\n ENDING EARLY \n");
     exit(1);
@@ -2632,12 +2632,6 @@ void ZStruct::dft_para_q(int niso1)
       cmdfile << "0" << endl;
     cmdfile.close();
     printf("\n");
-#if !SKIPDFT
-    string cmd = "./qmakedsp";
-    system(cmd.c_str());
-    cmd = "qsub "+cmdfile_string+".qsh";
-    system(cmd.c_str());
-#endif
 
     int qnotdone = true;
     int* dftdone = new int[niso1+1];
@@ -2815,12 +2809,6 @@ void ZStruct::dft_para_ase_gaussian(int nreact, ICoord* icr)
       cmdfile << "0" << endl;
     cmdfile.close();
     printf("\n");
-#if !SKIPDFT
-    string cmd = "./qmakeda";
-    system(cmd.c_str());
-    cmd = "qsub "+cmdfile_string+".qsh";
-    system(cmd.c_str());
-#endif
 
     int qnotdone = true;
     int* dftdone = new int[nreact+1];
@@ -2969,12 +2957,6 @@ void ZStruct::dft_para_qchem(int nreact, ICoord* icr)
       cmdfile << "0" << endl;
     cmdfile.close();
     printf("\n");
-#if !SKIPDFT
-    string cmd = "./qmaked";
-    system(cmd.c_str());
-    cmd = "qsub "+cmdfile_string+".qsh";
-    system(cmd.c_str());
-#endif
 
     int qnotdone = true;
     int* dftdone = new int[nreact+1];
@@ -3071,9 +3053,6 @@ void ZStruct::gsm_para(int first, int last)
   printf(" gsm_para range: %i-%i \n",first,last-1); fflush(stdout);
   if (first>last-1) return;
 
-  #string cmd = "./qmakegf";
-  #system(cmd.c_str());
-  #cmd = "qsub "+cmdfile_string+".qsh";
 #if !SKIPDFT && !SKIPGSM
   system(cmd.c_str());
 #else
@@ -3085,11 +3064,7 @@ void ZStruct::gsm_para(int first, int last)
   for (int i=0;i<last;i++) gsmdone[i]=1;
   for (int i=first;i<last;i++) gsmdone[i]=0;
 
-#if DO_NOT_WAIT
   int max_wait = 0;
-#else
-  int max_wait = MAX_TIME_WAIT*10;
-#endif
 
 #define READ_ONLY 1
 
@@ -3582,7 +3557,7 @@ int ZStruct::create_isos(ICoord ic1, int nr, int niso1, int* active1, int wsh)
   if (active1[i]) 
     nact1++;
  
-  if (nact1>35)
+  if (nact1>1000)
   {
     printf("\n\n WARNING: too many unfrozen atoms! \n");
     printf("   this limit hardcoded: %i max \n",35);
