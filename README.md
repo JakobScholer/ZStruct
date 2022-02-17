@@ -1,5 +1,5 @@
 ## ZStruct
-Zstruct code based on original implementation from https://github.com/ZimmermanGroup/ZStruct modified in https://github.com/jakobandersen/ZStruct and again modified in this project to disable qsub jobs.
+Zstruct code based on original implementation from https://github.com/ZimmermanGroup/ZStruct modified in https://github.com/jakobandersen/ZStruct and again modified in this project to disable qsub jobs and remove atom limit (original limit of 35 atoms, now 1000 atoms.
 
 ## Compile
 ```
